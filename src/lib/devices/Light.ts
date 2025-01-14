@@ -45,11 +45,11 @@ class Light extends ElectricityDataDevice {
         await this.#setPowerState?.updateValue(value);
     }
 
-    async setPower(value: boolean): Promise<void> {
+    setPower(value: boolean): Promise<void> {
         if (!this.#setPowerState) {
             throw new Error('Set state not found');
         }
-        await this.#setPowerState.setValue(value);
+        return this.#setPowerState.setValue(value);
     }
 
     getPowerActual(): boolean | undefined {

@@ -45,7 +45,7 @@ class Cie extends Ct {
         return undefined;
     }
 
-    async setCie(value: string): Promise<void> {
+    setCie(value: string): Promise<void> {
         if (!this.#cie) {
             throw new Error('CIE state not found');
         }
@@ -73,28 +73,28 @@ class Cie extends Ct {
         return this.#cie.setValue(`[${this.getXy()?.x},${y}]`);
     }
 
-    async updateCie(value: string): Promise<void> {
+    updateCie(value: string): Promise<void> {
         if (!this.#cie) {
             throw new Error('CIE state not found');
         }
         return this.#cie.updateValue(value);
     }
 
-    async updateXy(x: number, y: number): Promise<void> {
+    updateXy(x: number, y: number): Promise<void> {
         if (!this.#cie) {
             throw new Error('CIE state not found');
         }
         return this.#cie.updateValue(`[${x},${y}]`);
     }
 
-    async updateX(x: number): Promise<void> {
+    updateX(x: number): Promise<void> {
         if (!this.#cie) {
             throw new Error('CIE state not found');
         }
         return this.#cie.updateValue(`[${x},${this.getXy()?.y}]`);
     }
 
-    async updateY(y: number): Promise<void> {
+    updateY(y: number): Promise<void> {
         if (!this.#cie) {
             throw new Error('CIE state not found');
         }

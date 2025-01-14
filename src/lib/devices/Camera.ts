@@ -83,7 +83,7 @@ class Camera extends GenericDevice {
         return this.#autoFocusState.value;
     }
 
-    async setAutoFocus(value: boolean): Promise<void> {
+    setAutoFocus(value: boolean): Promise<void> {
         if (!this.#autoFocusState) {
             throw new Error('AutoFocus state not found');
         }
@@ -97,7 +97,7 @@ class Camera extends GenericDevice {
         return this.#autoWhiteBalanceState.value;
     }
 
-    async setAutoWhiteBalance(value: boolean): Promise<void> {
+    setAutoWhiteBalance(value: boolean): Promise<void> {
         if (!this.#autoWhiteBalanceState) {
             throw new Error('AutoWhiteBalance state not found');
         }
@@ -111,7 +111,7 @@ class Camera extends GenericDevice {
         return this.#brightnessState.value;
     }
 
-    async setBrightness(value: boolean): Promise<void> {
+    setBrightness(value: boolean): Promise<void> {
         if (!this.#brightnessState) {
             throw new Error('Brightness state not found');
         }
@@ -125,7 +125,7 @@ class Camera extends GenericDevice {
         return this.#nightModeState.value;
     }
 
-    async setNightMode(value: boolean): Promise<void> {
+    setNightMode(value: boolean): Promise<void> {
         if (!this.#nightModeState) {
             throw new Error('NightMode state not found');
         }
@@ -139,7 +139,7 @@ class Camera extends GenericDevice {
         return this.#ptzState.value;
     }
 
-    async setPtz(value: number): Promise<void> {
+    setPtz(value: number): Promise<void> {
         if (!this.#ptzState) {
             throw new Error('PTZ state not found');
         }

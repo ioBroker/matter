@@ -199,35 +199,35 @@ class Media extends GenericDevice {
         return this.#getStateState.value;
     }
 
-    async setPlay(): Promise<void> {
+    setPlay(): Promise<void> {
         if (!this.#setPlayState) {
             throw new Error('Play state not found');
         }
         return this.#setPlayState.setValue(true);
     }
 
-    async setPause(): Promise<void> {
+    setPause(): Promise<void> {
         if (!this.#setPauseState) {
             throw new Error('Pause state not found');
         }
         return this.#setPauseState.setValue(true);
     }
 
-    async setStop(): Promise<void> {
+    setStop(): Promise<void> {
         if (!this.#setStopState) {
             throw new Error('Stop state not found');
         }
         return this.#setStopState.setValue(true);
     }
 
-    async setNext(): Promise<void> {
+    setNext(): Promise<void> {
         if (!this.#setNextState) {
             throw new Error('Next state not found');
         }
         return this.#setNextState.setValue(true);
     }
 
-    async setPrevious(): Promise<void> {
+    setPrevious(): Promise<void> {
         if (!this.#setPrevState) {
             throw new Error('Prev state not found');
         }
@@ -241,7 +241,7 @@ class Media extends GenericDevice {
         return this.#shuffleState.value;
     }
 
-    async setShuffle(value: boolean): Promise<void> {
+    setShuffle(value: boolean): Promise<void> {
         if (!this.#shuffleState) {
             throw new Error('Shuffle state not found');
         }
@@ -255,7 +255,7 @@ class Media extends GenericDevice {
         return this.#repeatState.value;
     }
 
-    async setRepeat(value: number): Promise<void> {
+    setRepeat(value: number): Promise<void> {
         if (!this.#repeatState) {
             throw new Error('Repeat state not found');
         }
@@ -304,7 +304,7 @@ class Media extends GenericDevice {
         return this.#getElapsedState.value;
     }
 
-    async setSeek(value: number): Promise<void> {
+    setSeek(value: number): Promise<void> {
         if (!this.#setSeekState) {
             throw new Error('Seek state not found');
         }
@@ -339,7 +339,7 @@ class Media extends GenericDevice {
         return this.#getVolumeState.value;
     }
 
-    async setVolume(value: number): Promise<void> {
+    setVolume(value: number): Promise<void> {
         if (!this.#setVolumeState) {
             throw new Error('Volume state not found');
         }
@@ -353,7 +353,7 @@ class Media extends GenericDevice {
         return this.#muteState.value;
     }
 
-    async setMute(value: boolean): Promise<void> {
+    setMute(value: boolean): Promise<void> {
         if (!this.#muteState) {
             throw new Error('Mute state not found');
         }

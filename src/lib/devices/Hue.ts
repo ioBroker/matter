@@ -36,14 +36,14 @@ class Hue extends Ct {
         return this.#hue.value;
     }
 
-    async setHue(value: number): Promise<void> {
+    setHue(value: number): Promise<void> {
         if (!this.#hue) {
             throw new Error('HUE state not found');
         }
         return this.#hue.setValue(value);
     }
 
-    async updateHue(value: number): Promise<void> {
+    updateHue(value: number): Promise<void> {
         if (!this.#hue) {
             throw new Error('HUE state not found');
         }
@@ -57,14 +57,14 @@ class Hue extends Ct {
         return this.#saturationState.value;
     }
 
-    async setSaturation(value: number): Promise<void> {
+    setSaturation(value: number): Promise<void> {
         if (!this.#saturationState) {
             throw new Error('Saturation state not found');
         }
         return this.#saturationState.setValue(value);
     }
 
-    async updateSaturation(value: number): Promise<void> {
+    updateSaturation(value: number): Promise<void> {
         if (!this.#saturationState) {
             throw new Error('Saturation state not found');
         }

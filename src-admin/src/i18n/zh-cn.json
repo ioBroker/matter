@@ -108,6 +108,7 @@
     "No devices was added, as they are already in the list or not allowed by license": "未添加任何设备，因为它们已在列表中或许可证不允许",
     "No devices was added, as they are not allowed by license": "未添加任何设备，因为许可证不允许这些设备",
     "No one device created. Create one, by clicking on the \"+\" button on the left.": "尚未创建设备。点击左侧的“+”按钮创建一个。",
+    "Node got enabled and will be connected now. It might take a moment until the devices of this node are shown.": "Node got enabled and will be connected now. It might take a moment until the devices of this node are shown.",
     "Not connected": "未连接",
     "Not supported yet": "尚不支持",
     "Not used devices": "未使用的设备",

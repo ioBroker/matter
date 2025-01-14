@@ -108,6 +108,7 @@
     "No devices was added, as they are already in the list or not allowed by license": "Устройства не были добавлены, так как они уже есть в списке или не разрешены лицензией.",
     "No devices was added, as they are not allowed by license": "Устройства не добавлены, так как они не разрешены лицензией.",
     "No one device created. Create one, by clicking on the \"+\" button on the left.": "Ни одно устройство не создано. Создайте его, нажав на кнопку \"+\" слева.",
+    "Node got enabled and will be connected now. It might take a moment until the devices of this node are shown.": "Узел включен и теперь будет подключен. Может потребоваться некоторое время, чтобы отобразились устройства этого узла.",
     "Not connected": "Не подключен",
     "Not supported yet": "Пока не поддерживается",
     "Not used devices": "Не используемые устройства",

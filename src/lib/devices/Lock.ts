@@ -44,7 +44,7 @@ class Lock extends GenericDevice {
         return (this.#getLockState || this.#setLockState)?.value;
     }
 
-    async setLockState(value: boolean): Promise<void> {
+    setLockState(value: boolean): Promise<void> {
         if (!this.#setLockState) {
             throw new Error('Level state not found');
         }
@@ -55,12 +55,8 @@ class Lock extends GenericDevice {
         if (!this.#getLockState && !this.#setLockState) {
             throw new Error('Level state not found');
         }
-        if (this.#getLockState) {
-            await this.#getLockState.updateValue(value);
-        }
-        if (this.#setLockState) {
-            await this.#setLockState.updateValue(value);
-        }
+        await this.#getLockState?.updateValue(value);
+        await this.#setLockState?.updateValue(value);
     }
 
     getLockStateActual(): boolean | undefined {
@@ -78,7 +74,7 @@ class Lock extends GenericDevice {
         await this.#setLockState?.updateValue(value);
     }
 
-    async setOpen(): Promise<void> {
+    setOpen(): Promise<void> {
         if (!this.#setOpenState) {
             throw new Error('Open state not found');
         }

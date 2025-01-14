@@ -239,7 +239,12 @@ TBD
 
 ## Changelog
 ### **WORK IN PROGRESS**
-* (@GermanBluefox) Showed the device name in paring dialog  
+* (@GermanBluefox) Showed the device name in paring dialog
+* (@GermanBluefox/Apollon77) Adjusts connection type icons
+* (@Apollon77) Optimized the discovery dialog handling
+* (@Apollon77) Fixed Thermostat for Controller to update temperatures
+* (@Apollon77) Gives Energy sensors a dedicated icon
+* (@Apollon77) Optimized an fixed multiple things
 
 ### 0.3.6 (2025-01-13)
 * (@GermanBluefox) Fixed GUI errors

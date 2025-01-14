@@ -506,14 +506,13 @@ class Controller implements GeneralNode {
             )
             .then(result => {
                 this.#adapter.log.info(`Discovering stopped. Found ${result.length} devices.`);
-                if (this.#discovering) {
-                    this.#adapter
-                        .setState('controller.info.discovering', false, true)
-                        .catch(error => this.#adapter.log.info(`Error setting state: ${error}`));
-                    this.#discovering = false;
-                    if (obj.callback) {
-                        this.#adapter.sendTo(obj.from, obj.command, { result }, obj.callback);
-                    }
+                this.#adapter
+                    .setState('controller.info.discovering', false, true)
+                    .catch(error => this.#adapter.log.info(`Error setting state: ${error}`));
+                this.#discovering = false;
+                if (obj.callback) {
+                    this.#adapter.log.info(`Sending result to "${JSON.stringify(result)}"`);
+                    this.#adapter.sendTo(obj.from, obj.command, { result }, obj.callback);
                 }
             })
             .catch(error => {

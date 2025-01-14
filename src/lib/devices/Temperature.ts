@@ -38,11 +38,11 @@ class Temperature extends GenericDevice {
         return this.#getTemperatureState.value;
     }
 
-    async updateTemperature(value: number): Promise<void> {
+    updateTemperature(value: number): Promise<void> {
         if (!this.#getTemperatureState) {
             throw new Error('Value state not found');
         }
-        await this.#getTemperatureState.updateValue(value);
+        return this.#getTemperatureState.updateValue(value);
     }
 
     hasHumidity(): boolean {

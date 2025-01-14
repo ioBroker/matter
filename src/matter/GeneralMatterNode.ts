@@ -4,6 +4,7 @@ import {
     BridgedDeviceBasicInformation,
     GeneralDiagnosticsCluster,
     WiFiNetworkDiagnosticsCluster,
+    OperationalCredentialsCluster,
 } from '@matter/main/clusters';
 import { AttributeModel, ClusterModel, CommandModel, MatterModel } from '@matter/main/model';
 import {
@@ -29,7 +30,7 @@ import type { MatterAdapter } from '../main';
 import type { GenericDeviceToIoBroker } from './to-iobroker/GenericDeviceToIoBroker';
 import ioBrokerDeviceFabric, { identifyDeviceTypes } from './to-iobroker/ioBrokerFactory';
 import type { StructuredJsonFormData } from '../lib/JsonConfigUtils';
-import type { DeviceStatus } from '@iobroker/dm-utils';
+import type { DeviceStatus, ConfigConnectionType } from '@iobroker/dm-utils';
 
 export type PairedNodeConfig = {
     nodeId: NodeId;
@@ -1144,5 +1145,54 @@ export class GeneralMatterNode {
         }
 
         return status;
+    }
+
+    get connectionType(): ConfigConnectionType {
+        if (this.node.deviceInformation?.threadConnected) {
+            return 'thread';
+        } else if (this.node.deviceInformation?.wifiConnected) {
+            return 'wifi';
+        } else if (this.node.deviceInformation?.ethernetConnected) {
+            return 'lan';
+        }
+        return 'other';
+    }
+
+    async getConnectionStatus(): Promise<StructuredJsonFormData> {
+        const result: StructuredJsonFormData = {};
+
+        result.connection = {
+            __text__connected: this.node.isConnected
+                ? 'The node is successfully connected.'
+                : this.#enabled
+                  ? 'The node is currently not connected.'
+                  : 'The node is disabled.',
+            status: decamelize(NodeStates[this.node.state]),
+        };
+
+        if (this.node.isConnected) {
+            result.connection.address = this.#connectedAddress;
+            if (this.node.deviceInformation?.threadConnected) {
+                result.connection.connectedVia = 'Thread';
+            } else if (this.node.deviceInformation?.wifiConnected) {
+                result.connection.connectedVia = 'WiFi';
+            } else if (this.node.deviceInformation?.ethernetConnected) {
+                result.connection.connectedVia = 'Ethernet';
+            }
+
+            const operationalCredentials = this.node.getRootClusterClient(OperationalCredentialsCluster);
+            if (operationalCredentials) {
+                //const ownFabricIndex = await operationalCredentials.getCurrentFabricIndexAttribute();
+                const fabrics = await operationalCredentials.getFabricsAttribute(true, false);
+                fabrics.forEach(fabric => {
+                    const fabricId = fabric.fabricId;
+                    const fabricName = `${fabric.vendorId}`;
+                    result.connection[`fabric${fabricId}__${fabricName}`] = fabric.label;
+                    // TODO Add name lookup and button to manage beside own Fabric index
+                });
+            }
+        }
+
+        return result;
     }
 }

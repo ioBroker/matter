@@ -114,7 +114,9 @@ interface ComponentState {
     /** If we are currently waiting for backend processing */
     backendProcessingActive: boolean;
     discovered: CommissionableDevice[];
+    /** Discovery process is active in the backend */
     discoveryRunning: boolean;
+    /** Was a discovery result received which means that the dialog should stay open also after discovery ended */
     discoveryDone: boolean;
     nodes: Record<string, ioBroker.Object>;
     states: Record<string, ioBroker.State>;
@@ -230,7 +232,10 @@ class Controller extends Component<ComponentProps, ComponentState> {
             if (state?.val) {
                 this.setState({ discoveryRunning: true });
             } else {
-                this.setState({ discoveryRunning: false });
+                this.setState({
+                    discoveryRunning: false,
+                    discoveryDone: !!this.state.discovered.length, // Leave dialog open if we found devices
+                });
             }
             return;
         }
@@ -616,6 +621,8 @@ class Controller extends Component<ComponentProps, ComponentState> {
                                             onClick={async () => {
                                                 await this.stopDiscovery();
                                                 this.setState({
+                                                    discoveryDone: false,
+                                                    discovered: [],
                                                     showQrCodeDialog: device,
                                                 });
                                             }}
@@ -657,11 +664,13 @@ class Controller extends Component<ComponentProps, ComponentState> {
      * Stop discovering devices
      */
     async stopDiscovery(): Promise<void> {
+        if (!this.state.discoveryRunning) {
+            // Nothing to stop if no Discovery is running
+            return;
+        }
         console.log('Stop discovery');
 
         await this.props.socket.sendTo(`matter.${this.props.instance}`, 'controllerDiscoveryStop', {});
-
-        this.setState({ discoveryDone: !!this.state.discovered.length });
     }
 
     /**
@@ -765,8 +774,8 @@ class Controller extends Component<ComponentProps, ComponentState> {
                                         window.alert(`Error on discovery: ${result.error}`);
                                     } else if (result.result) {
                                         this.setState({
+                                            discoveryDone: !!result.result.length,
                                             discovered: result.result,
-                                            discoveryDone: true,
                                         });
                                     }
                                 });

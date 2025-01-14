@@ -44,7 +44,7 @@ class Volume extends GenericDevice {
         return (this.#getLevelState || this.#setLevelState)?.value;
     }
 
-    async setLevel(value: number): Promise<void> {
+    setLevel(value: number): Promise<void> {
         if (!this.#setLevelState) {
             throw new Error('Level state not found');
         }
@@ -81,7 +81,7 @@ class Volume extends GenericDevice {
         return this.#muteState.value;
     }
 
-    async setMute(value: boolean): Promise<void> {
+    setMute(value: boolean): Promise<void> {
         if (!this.#muteState) {
             throw new Error('Mute state not found');
         }

@@ -52,11 +52,11 @@ class Rgb extends Ct {
         return this.#red.value;
     }
 
-    async setRed(value: number): Promise<void> {
+    setRed(value: number): Promise<void> {
         if (!this.#red) {
             throw new Error('Red state not found');
         }
-        await this.#red.setValue(value);
+        return this.#red.setValue(value);
     }
 
     getGreen(): number | undefined {
@@ -66,11 +66,11 @@ class Rgb extends Ct {
         return this.#green.value;
     }
 
-    async setGreen(value: number): Promise<void> {
+    setGreen(value: number): Promise<void> {
         if (!this.#green) {
             throw new Error('Red state not found');
         }
-        await this.#green.setValue(value);
+        return this.#green.setValue(value);
     }
 
     getBlue(): number | undefined {
@@ -80,11 +80,11 @@ class Rgb extends Ct {
         return this.#blue.value;
     }
 
-    async setBlue(value: number): Promise<void> {
+    setBlue(value: number): Promise<void> {
         if (!this.#blue) {
             throw new Error('Red state not found');
         }
-        await this.#blue.setValue(value);
+        return this.#blue.setValue(value);
     }
 
     getWhite(): number | undefined {
@@ -94,11 +94,11 @@ class Rgb extends Ct {
         return this.#white.value;
     }
 
-    async setWhite(value: number): Promise<void> {
+    setWhite(value: number): Promise<void> {
         if (!this.#white) {
             throw new Error('Red state not found');
         }
-        await this.#white.setValue(value);
+        return this.#white.setValue(value);
     }
 }
 

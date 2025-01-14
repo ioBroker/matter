@@ -103,6 +103,14 @@ export abstract class GenericDeviceToIoBroker {
     /** Return the ioBroker device this mapping is for. */
     abstract ioBrokerDevice: GenericDevice;
 
+    get ioBrokerDeviceType(): string | undefined {
+        return this.ioBrokerDevice.deviceType;
+    }
+
+    get iconDeviceType(): string | undefined {
+        return this.ioBrokerDevice.deviceType;
+    }
+
     get name(): string {
         return this.#name ?? this.#defaultName ?? this.deviceType;
     }

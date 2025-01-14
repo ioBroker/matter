@@ -35,11 +35,11 @@ class ButtonSensor extends GenericDevice {
         return this.#setPressState.value;
     }
 
-    async updatePress(): Promise<void> {
+    updatePress(): Promise<void> {
         if (!this.#setPressState) {
             throw new Error('Press state not found');
         }
-        await this.#setPressState.updateValue(true);
+        return this.#setPressState.updateValue(true);
     }
 
     hasPressLong(): boolean {
@@ -53,11 +53,11 @@ class ButtonSensor extends GenericDevice {
         return this.#setPressLongState.value;
     }
 
-    async updatePressLong(): Promise<void> {
+    updatePressLong(): Promise<void> {
         if (!this.#setPressLongState) {
             throw new Error('PressLong state not found');
         }
-        await this.#setPressLongState.updateValue(true);
+        return this.#setPressLongState.updateValue(true);
     }
 }
 

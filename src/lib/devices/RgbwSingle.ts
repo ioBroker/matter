@@ -28,7 +28,7 @@ class RgbwSingle extends Ct {
         return this.#rgbw.value;
     }
 
-    async setRgbw(value: string): Promise<void> {
+    setRgbw(value: string): Promise<void> {
         if (!this.#rgbw) {
             throw new Error('RGBW state not found');
         }

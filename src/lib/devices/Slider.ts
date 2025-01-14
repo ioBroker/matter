@@ -36,7 +36,7 @@ class Slider extends GenericDevice {
         return (this.#getLevelState || this.#setLevelState)?.value;
     }
 
-    async setLevel(value: number): Promise<void> {
+    setLevel(value: number): Promise<void> {
         if (!this.#setLevelState) {
             throw new Error('Level state not found');
         }

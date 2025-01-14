@@ -96,21 +96,21 @@ class BlindButtons extends GenericDevice {
         );
     }
 
-    async setStop(): Promise<void> {
+    setStop(): Promise<void> {
         if (!this.#setStopState) {
             throw new Error('Stop state not found');
         }
         return this.#setStopState.setValue(true);
     }
 
-    async setOpen(): Promise<void> {
+    setOpen(): Promise<void> {
         if (!this.#setOpenState) {
             throw new Error('Open state not found');
         }
         return this.#setOpenState.setValue(true);
     }
 
-    async setClose(): Promise<void> {
+    setClose(): Promise<void> {
         if (!this.#setCloseState) {
             throw new Error('Close state not found');
         }
@@ -124,7 +124,7 @@ class BlindButtons extends GenericDevice {
         return (this.#getTiltState || this.#setTiltState)?.value;
     }
 
-    async setTiltLevel(value: number): Promise<void> {
+    setTiltLevel(value: number): Promise<void> {
         if (!this.#setTiltState) {
             throw new Error('Tilt state not found');
         }
@@ -147,28 +147,28 @@ class BlindButtons extends GenericDevice {
     }
 
     async updateTiltLevelActual(value: number): Promise<void> {
-        if (!this.#setTiltState) {
+        if (!this.#getTiltState) {
             throw new Error('Level state not found');
         }
-        await this.#setTiltState.updateValue(value);
+        await this.#getTiltState.updateValue(value);
         await this.#setTiltState?.updateValue(value);
     }
 
-    async setTiltStop(): Promise<void> {
+    setTiltStop(): Promise<void> {
         if (!this.#setTiltStopState) {
             throw new Error('Tilt stop state not found');
         }
         return this.#setTiltStopState.setValue(true);
     }
 
-    async setTiltOpen(): Promise<void> {
+    setTiltOpen(): Promise<void> {
         if (!this.#setTiltOpenState) {
             throw new Error('Tilt open state not found');
         }
         return this.#setTiltOpenState.setValue(true);
     }
 
-    async setTiltClose(): Promise<void> {
+    setTiltClose(): Promise<void> {
         if (!this.#setTiltCloseState) {
             throw new Error('Tilt close state not found');
         }

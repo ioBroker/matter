@@ -71,7 +71,7 @@ class Dimmer extends ElectricityDataDevice {
         return (this.#getLevelState || this.#setLevelState)?.value;
     }
 
-    async setLevel(value: number): Promise<void> {
+    setLevel(value: number): Promise<void> {
         if (!this.#setLevelState) {
             throw new Error('Level state not found');
         }
@@ -115,10 +115,7 @@ class Dimmer extends ElectricityDataDevice {
         return undefined;
     }
 
-    async setPower(value: boolean): Promise<void> {
-        if (!this.#setPowerState && !this.#setLevelState) {
-            throw new Error('Power state not found');
-        }
+    setPower(value: boolean): Promise<void> {
         if (this.#setPowerState) {
             return this.#setPowerState.setValue(value);
         }
@@ -134,6 +131,7 @@ class Dimmer extends ElectricityDataDevice {
             }
             return this.#setLevelState.setValue(0);
         }
+        throw new Error('Power state not found');
     }
 
     async updatePower(value: boolean): Promise<void> {

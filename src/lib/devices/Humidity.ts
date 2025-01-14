@@ -27,11 +27,11 @@ class Humidity extends GenericDevice {
         return this.#getHumidityState.value;
     }
 
-    async updateHumidity(value: number): Promise<void> {
+    updateHumidity(value: number): Promise<void> {
         if (!this.#getHumidityState) {
             throw new Error('Value state not found');
         }
-        await this.#getHumidityState.updateValue(value);
+        return this.#getHumidityState.updateValue(value);
     }
 }
 

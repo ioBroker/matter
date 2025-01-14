@@ -20,7 +20,7 @@ class Button extends GenericDevice {
         );
     }
 
-    async setPress(): Promise<void> {
+    setPress(): Promise<void> {
         if (!this.#setPressState) {
             throw new Error('Press state not found');
         }

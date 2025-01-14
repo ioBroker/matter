@@ -11,19 +11,18 @@ class Blind extends BlindButtons {
 
         this._construction.push(
             this.addDeviceStates([
-                // actual value first, as it will be read first
                 {
                     name: 'ACTUAL',
                     valueType: ValueType.NumberPercent,
                     accessType: StateAccessType.Read,
-                    type: PropertyType.Level,
+                    type: PropertyType.LevelActual,
                     callback: state => (this.#getLevelState = state),
                 },
                 {
                     name: 'SET',
                     valueType: ValueType.NumberPercent,
                     accessType: StateAccessType.ReadWrite,
-                    type: PropertyType.LevelActual,
+                    type: PropertyType.Level,
                     callback: state => (this.#setLevelState = state),
                 },
             ]),
@@ -37,7 +36,7 @@ class Blind extends BlindButtons {
         return (this.#getLevelState || this.#setLevelState)?.value;
     }
 
-    async setLevel(value: number): Promise<void> {
+    setLevel(value: number): Promise<void> {
         if (!this.#setLevelState) {
             throw new Error('Level state not found');
         }
@@ -57,13 +56,6 @@ class Blind extends BlindButtons {
             throw new Error('Level state not found');
         }
         return this.#getLevelState.value;
-    }
-
-    async setLevelActual(value: number): Promise<void> {
-        if (!this.#setLevelState) {
-            throw new Error('Level state not found');
-        }
-        await this.#setLevelState.setValue(value);
     }
 
     async updateLevelActual(value: number): Promise<void> {

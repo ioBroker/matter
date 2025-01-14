@@ -108,6 +108,7 @@
     "No devices was added, as they are already in the list or not allowed by license": "No devices was added, as they are already in the list or not allowed by license",
     "No devices was added, as they are not allowed by license": "No devices was added, as they are not allowed by license",
     "No one device created. Create one, by clicking on the \"+\" button on the left.": "No one device created. Create one, by clicking on the \"+\" button on the left.",
+    "Node got enabled and will be connected now. It might take a moment until the devices of this node are shown.": "Node got enabled and will be connected now. It might take a moment until the devices of this node are shown.",
     "Not connected": "Not connected",
     "Not supported yet": "Not supported yet",
     "Not used devices": "Not used devices",

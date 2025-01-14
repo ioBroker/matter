@@ -112,12 +112,13 @@ export class WindowCoveringToIoBroker extends GenericElectricityDataDeviceToIoBr
             convertValue: (value: TypeFromBitSchema<typeof WindowCovering.OperationalStatus>) =>
                 value.global !== WindowCovering.MovementStatus.Stopped,
         });
+        // TODO introduce value.direction once in type definition
         /*this.enableDeviceTypeStateForAttribute(PropertyType.Direction, {
             endpointId: this.appEndpoint.getNumber(),
             clusterId: WindowCovering.Cluster.id,
             attributeName: 'configStatus',
             convertValue: (value: TypeFromBitSchema<typeof WindowCovering.OperationalStatus>) => {
-                return !value.global !== WindowCovering.MovementStatus.Stopped;
+                return value.global !== WindowCovering.MovementStatus.Stopped;
             },
         });*/
 

@@ -111,7 +111,7 @@ class AirCondition extends ElectricityDataDevice {
         return this.#levelState.value;
     }
 
-    async setLevel(value: number): Promise<void> {
+    setLevel(value: number): Promise<void> {
         if (!this.#levelState) {
             throw new Error('Level state not found');
         }
@@ -132,7 +132,7 @@ class AirCondition extends ElectricityDataDevice {
         return this.#powerState.value;
     }
 
-    async setPower(value: boolean): Promise<void> {
+    setPower(value: boolean): Promise<void> {
         if (!this.#powerState) {
             throw new Error('Power state not found');
         }
@@ -153,7 +153,7 @@ class AirCondition extends ElectricityDataDevice {
         return this.#boostState.value;
     }
 
-    async setBoost(value: boolean | number): Promise<void> {
+    setBoost(value: boolean | number): Promise<void> {
         if (!this.#boostState) {
             throw new Error('Boost state not found');
         }
@@ -167,7 +167,7 @@ class AirCondition extends ElectricityDataDevice {
         return this.#speedState.value;
     }
 
-    async setSpeed(value: AirConditionerSpeed): Promise<void> {
+    setSpeed(value: AirConditionerSpeed): Promise<void> {
         if (!this.#speedState) {
             throw new Error('Speed state not found');
         }
@@ -188,7 +188,7 @@ class AirCondition extends ElectricityDataDevice {
         return this.#SwingState.value;
     }
 
-    async setSwing(value: AirConditionerSwing): Promise<void> {
+    setSwing(value: AirConditionerSwing): Promise<void> {
         if (!this.#SwingState) {
             throw new Error('Swing state not found');
         }
@@ -209,11 +209,11 @@ class AirCondition extends ElectricityDataDevice {
         return this.#modeState.value;
     }
 
-    async setMode(mode: AirConditionerMode): Promise<void> {
+    setMode(mode: AirConditionerMode): Promise<void> {
         if (!this.#modeState) {
             throw new Error('Mode state not found');
         }
-        await this.#modeState.setValue(mode);
+        return this.#modeState.setValue(mode);
     }
 
     getModes(): AirConditionerMode[] {

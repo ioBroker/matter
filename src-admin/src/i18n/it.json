@@ -108,6 +108,7 @@
     "No devices was added, as they are already in the list or not allowed by license": "Nessun dispositivo è stato aggiunto, poiché sono già presenti nell'elenco o non sono consentiti dalla licenza",
     "No devices was added, as they are not allowed by license": "Nessun dispositivo è stato aggiunto, poiché non sono consentiti dalla licenza",
     "No one device created. Create one, by clicking on the \"+\" button on the left.": "Nessun dispositivo creato. Creane uno, cliccando sul pulsante \"+\" a sinistra.",
+    "Node got enabled and will be connected now. It might take a moment until the devices of this node are shown.": "Il nodo è stato abilitato e sarà ora connesso. Potrebbe essere necessario un po' di tempo prima che vengano visualizzati i dispositivi di questo nodo.",
     "Not connected": "Non collegata",
     "Not supported yet": "Non ancora supportato",
     "Not used devices": "Dispositivi non utilizzati",

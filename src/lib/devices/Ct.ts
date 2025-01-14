@@ -80,17 +80,17 @@ class Ct extends ElectricityDataDevice {
         return this.#dimmerState.value;
     }
 
-    async updateDimmer(value: number): Promise<void> {
+    updateDimmer(value: number): Promise<void> {
         if (!this.#dimmerState) {
             if (!this.#brightnessState) {
                 throw new Error('Dimmer state not found');
             }
             return this.#brightnessState.updateValue(value);
         }
-        await this.#dimmerState.updateValue(value);
+        return this.#dimmerState.updateValue(value);
     }
 
-    async setDimmer(value: number): Promise<void> {
+    setDimmer(value: number): Promise<void> {
         if (!this.#dimmerState) {
             if (!this.#brightnessState) {
                 throw new Error('Dimmer state not found');
@@ -111,14 +111,14 @@ class Ct extends ElectricityDataDevice {
         return this.#brightnessState.value;
     }
 
-    async updateBrightness(value: number): Promise<void> {
+    updateBrightness(value: number): Promise<void> {
         if (!this.#brightnessState) {
             throw new Error('Brightness state not found');
         }
-        await this.#brightnessState.updateValue(value);
+        return this.#brightnessState.updateValue(value);
     }
 
-    async setBrightness(value: number): Promise<void> {
+    setBrightness(value: number): Promise<void> {
         if (!this.#brightnessState) {
             throw new Error('Brightness state not found');
         }
@@ -139,14 +139,14 @@ class Ct extends ElectricityDataDevice {
         return this.#temperatureState.getMinMax();
     }
 
-    async updateTemperature(value: number): Promise<void> {
+    updateTemperature(value: number): Promise<void> {
         if (!this.#temperatureState) {
             throw new Error('Temperature state not found');
         }
-        await this.#temperatureState.updateValue(value);
+        return this.#temperatureState.updateValue(value);
     }
 
-    async setTemperature(value: number): Promise<void> {
+    setTemperature(value: number): Promise<void> {
         if (!this.#temperatureState) {
             throw new Error('Temperature state not found');
         }
@@ -160,7 +160,7 @@ class Ct extends ElectricityDataDevice {
         return (this.#getPowerState || this.#setPowerState)?.value;
     }
 
-    async setPower(value: boolean): Promise<void> {
+    setPower(value: boolean): Promise<void> {
         if (!this.#setPowerState) {
             throw new Error('On state not found');
         }

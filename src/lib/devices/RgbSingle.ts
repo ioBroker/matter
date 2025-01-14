@@ -28,7 +28,7 @@ class RgbSingle extends Ct {
         return this.#rgb.value;
     }
 
-    async setRgb(value: string): Promise<void> {
+    setRgb(value: string): Promise<void> {
         if (!this.#rgb) {
             throw new Error('RGB state not found');
         }

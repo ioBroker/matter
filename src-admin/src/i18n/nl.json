@@ -108,6 +108,7 @@
     "No devices was added, as they are already in the list or not allowed by license": "Er zijn geen apparaten toegevoegd, omdat ze al in de lijst staan of niet zijn toegestaan door de licentie",
     "No devices was added, as they are not allowed by license": "Er zijn geen apparaten toegevoegd, omdat deze niet zijn toegestaan volgens de licentie",
     "No one device created. Create one, by clicking on the \"+\" button on the left.": "Geen enkel apparaat gemaakt. Maak er een door op de \"+\" knop aan de linkerkant te klikken.",
+    "Node got enabled and will be connected now. It might take a moment until the devices of this node are shown.": "Node is ingeschakeld en wordt nu verbonden. Het kan even duren voordat de apparaten van dit knooppunt worden weergegeven.",
     "Not connected": "Niet verbonden",
     "Not supported yet": "Nog niet ondersteund",
     "Not used devices": "Niet gebruikte apparaten",

@@ -10,6 +10,7 @@ import {
     type InstanceDetails,
     type JsonFormSchema,
     type JsonFormData,
+    type ConfigConnectionType,
     DeviceManagement,
     ACTIONS,
 } from '@iobroker/dm-utils';
@@ -179,6 +180,7 @@ class MatterAdapterDeviceManagement extends DeviceManagement<MatterAdapter> {
         // remove null actions
         actions = actions?.filter(it => it) || [];
 
+        const connectionType = ioNode.connectionType;
         const res = new Array<DeviceInfo>();
         const node: DeviceInfo = {
             id,
@@ -187,6 +189,7 @@ class MatterAdapterDeviceManagement extends DeviceManagement<MatterAdapter> {
             ...details,
             status,
             enabled: isEnabled,
+            connectionType,
             hasDetails: true,
             actions: actions.length ? (actions as DeviceAction<'adapter'>[]) : undefined,
             color: 'secondary',
@@ -202,7 +205,7 @@ class MatterAdapterDeviceManagement extends DeviceManagement<MatterAdapter> {
         if (isEnabled) {
             let deviceCount = 0;
             for (const device of ioNode.devices.values()) {
-                const deviceInfo = await this.#getNodeDeviceEntries(device, id, details, isConnected);
+                const deviceInfo = await this.#getNodeDeviceEntries(device, id, details, isConnected, connectionType);
                 res.push(deviceInfo);
                 deviceCount++;
             }
@@ -223,17 +226,17 @@ class MatterAdapterDeviceManagement extends DeviceManagement<MatterAdapter> {
         nodeId: string,
         nodeDetails: NodeDetails,
         nodeConnected: boolean,
+        nodeConnectionType: ConfigConnectionType,
     ): Promise<DeviceInfo> {
         const data: DeviceInfo = {
             id: `${nodeId}-${device.number}`,
             name: device.name,
-            icon: device.ioBrokerDevice.deviceType,
+            icon: device.iconDeviceType,
             ...nodeDetails,
             status: await device.getStatus({
                 connection: nodeConnected ? 'connected' : 'disconnected',
             }),
-            // TODO: provide here the valid connection type (thread, wifi or bluetooth)
-            connectionType: 'wifi',
+            connectionType: nodeConnectionType,
             hasDetails: true,
             actions: [
                 {
@@ -250,9 +253,9 @@ class MatterAdapterDeviceManagement extends DeviceManagement<MatterAdapter> {
                 },
             ],
             group: {
-                key: `device/${device.ioBrokerDevice.deviceType}`,
-                name: this.#adapter.getText(device.ioBrokerDevice.deviceType as string),
-                icon: device.ioBrokerDevice.deviceType,
+                key: `device/${device.deviceType}`,
+                name: this.#adapter.getText(device.deviceType),
+                icon: device.iconDeviceType,
             },
         };
 
@@ -286,7 +289,7 @@ class MatterAdapterDeviceManagement extends DeviceManagement<MatterAdapter> {
         if (node.isEnabled) {
             await context.showMessage(
                 this.#adapter.t(
-                    'Node enabled and will be connected now. It might take a moment until the devices of this node are shown.',
+                    'Node got enabled and will be connected now. It might take a moment until the devices of this node are shown.',
                 ),
             );
         }
@@ -295,32 +298,19 @@ class MatterAdapterDeviceManagement extends DeviceManagement<MatterAdapter> {
     }
 
     async #handleOnStatusNode(node: GeneralMatterNode, context: ActionContext): Promise<{ refresh: DeviceRefresh }> {
-        // This is only an example how to react on clicking on Status
-        await context.showForm(
-            {
-                type: 'panel',
-                items: {
-                    connected: {
-                        type: 'checkbox',
-                        label: this.#adapter.getText('Connected'),
-                        sm: 12,
-                        readOnly: true,
-                        default: node.node.isConnected,
-                    },
+        const schema = convertDataToJsonConfig(await node.getConnectionStatus());
+
+        await context.showForm(schema, {
+            data: {},
+            maxWidth: 'md',
+            title: this.#adapter.getText('Connection Status'),
+            buttons: [
+                {
+                    type: 'cancel',
+                    label: this.#adapter.getText('Close'),
                 },
-            },
-            {
-                data: {},
-                maxWidth: 'md',
-                title: this.#adapter.getText('Status of Node'),
-                buttons: [
-                    {
-                        type: 'cancel',
-                        label: this.#adapter.getText('Close'),
-                    },
-                ],
-            },
-        );
+            ],
+        });
 
         return { refresh: false };
     }
